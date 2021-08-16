@@ -60,7 +60,7 @@ var initialize = cmd.Command{
 			panic(err)
 		}
 		defer f.Close()
-		f.WriteString(fmt.Sprintf("module %s\n", args[0]))
+		f.WriteString(fmt.Sprintf("module %s\n\n", args[0]))
 		return nil
 	},
 }
@@ -71,6 +71,11 @@ var get = cmd.Command{
 	Method: func(args []string, _ map[string]string) error {
 		if len(args) != 2 {
 			fmt.Println("expected 2 arguments <module-name> <tag>")
+			return nil
+		}
+
+		if _, err := os.Stat(pwd + "/mo.mod"); err != nil {
+			fmt.Println("need to initalize first")
 			return nil
 		}
 
@@ -96,7 +101,7 @@ var get = cmd.Command{
 			h, err := r.Next()
 			if err != nil {
 				if err == io.EOF {
-					return nil
+					break
 				}
 				return err
 			}
@@ -122,6 +127,16 @@ var get = cmd.Command{
 				f.Close()
 			}
 		}
+
+		f, err := os.OpenFile(pwd+"/mo.mod", os.O_APPEND|os.O_WRONLY, 0600)
+		if err != nil {
+			return err
+		}
+		defer f.Close()
+		if _, err := f.WriteString(fmt.Sprintf("require %s %s", args[0], args[1])); err != nil {
+			return err
+		}
+		return nil
 	},
 }
 
