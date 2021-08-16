@@ -129,7 +129,8 @@ func (c Command) command(name string, args Arguments) error {
 		}
 	}
 	if cmd.Name == "" {
-		return fmt.Errorf("command not found")
+		c.Help()
+		return nil
 	}
 	if err := cmd.Call(args...); err != nil {
 		cmd.Help()
