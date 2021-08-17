@@ -129,11 +129,34 @@ func (c Command) command(name string, args Arguments) error {
 		}
 	}
 	if cmd.Name == "" {
+		return fmt.Errorf("command not found")
+	}
+	if err := cmd.Call(args[1:]...); err != nil {
+		fmt.Println(err)
 		c.Help()
-		return nil
 	}
 	if err := cmd.Call(args...); err != nil {
 		cmd.Help()
+	}
+	return nil
+}
+
+func (c Command) checkArgs(args []string) error {
+	var s []string
+	for _, a := range c.Args {
+		s = append(s, fmt.Sprintf("<%s>", a))
+	}
+
+	l := len(c.Args)
+	if len(args) != l {
+		switch l {
+		case 0:
+			return fmt.Errorf("expected no argument")
+		case 1:
+			return fmt.Errorf("expected 1 argument: %s", s[0])
+		default:
+			return fmt.Errorf("expected %d argument(s): %s", len(c.Args), strings.Join(s, " "))
+		}
 	}
 	return nil
 }
