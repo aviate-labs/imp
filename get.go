@@ -5,9 +5,11 @@ import (
 	"compress/gzip"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"net/http"
 	"os"
 	"path/filepath"
+	"strings"
 
 	"github.com/aviate-labs/imp/internal/cmd"
 )
@@ -30,6 +32,10 @@ var get = cmd.Command{
 		resp, err := http.Get(fmt.Sprintf("https://%s/archive/refs/tags/%s.tar.gz", args[0], args[1]))
 		if err != nil {
 			fmt.Println(err)
+			return nil
+		}
+		if resp.StatusCode != 200 {
+			fmt.Printf("could not get package: %s@%s\n", args[0], args[1])
 			return nil
 		}
 		gzr, err := gzip.NewReader(resp.Body)
@@ -70,13 +76,16 @@ var get = cmd.Command{
 			}
 		}
 
-		f, err := os.OpenFile(pwd+"/mo.mod", os.O_APPEND|os.O_WRONLY, 0600)
+		mod, err := ioutil.ReadFile("./mo.mod")
 		if err != nil {
 			return err
 		}
-		defer f.Close()
-		if _, err := f.WriteString(fmt.Sprintf("require %s %s", args[0], args[1])); err != nil {
-			return err
+		dep := fmt.Sprintf("require %s %s\n", args[0], args[1])
+		if !strings.Contains(string(mod), dep) {
+			mod = append(mod, []byte(dep)...)
+		}
+		if err = ioutil.WriteFile("./mo.mod", mod, 0666); err != nil {
+			return nil
 		}
 		return nil
 	},
