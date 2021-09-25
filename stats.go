@@ -31,42 +31,42 @@ var subnet = cmd.Command{
 	Commands: []cmd.Command{
 		getDataCmd(
 			"message-count", "mc",
-			"returns the message count of a subnet",
+			"the message count of a subnet",
 			"metrics/pmessages-count",
 		),
 		getDataCmd(
 			"blocks", "b",
-			"returns the blocks of a subnet",
+			"the blocks of a subnet",
 			"metrics/pblock",
 		),
 		getDataCmd(
 			"memory-usage", "mu",
-			"returns the memory usage of a subnet",
+			"the memory usage of a subnet",
 			"metrics/ic-memory-usage",
 		),
 		getDataCmd(
 			"node-count", "nc",
-			"returns the node count of a subnet",
+			"the node count of a subnet",
 			"metrics/ic-nodes-count",
 		),
 		getDataCmd(
 			"finalization-rate", "fr",
-			"returns the finalization rate of a subnet",
+			"the finalization rate of a subnet",
 			"metrics/finalization-rate",
 		),
 		getDataCmd(
 			"registered-canisters", "rc",
-			"returns the amount of registered canisters in a subnet",
+			"the amount of registered canisters in a subnet",
 			"metrics/registered-canisters",
 		),
 		getDataCmd(
 			"cycle-burn-rate", "br",
-			"returns the cycle burn rate a subnet",
+			"the cycle burn rate a subnet",
 			"metrics/cycle-burn-rate",
 		),
 		getDataCmd(
 			"message-execution-rate", "er",
-			"returns the message execution rate a subnet",
+			"the message execution rate a subnet",
 			"metrics/message-execution-rate",
 		),
 	},

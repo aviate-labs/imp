@@ -58,7 +58,6 @@ func (c Command) method(args Arguments) error {
 	}
 	args, opts := c.extractOptions(args)
 	if err := c.checkArguments(args); err != nil {
-		fmt.Println(err)
 		c.Help()
 		return nil
 	}
@@ -133,8 +132,7 @@ func (c Command) command(name string, args Arguments) error {
 		return fmt.Errorf("command not found")
 	}
 	if err := cmd.Call(args...); err != nil {
-		fmt.Println(err)
-		c.Help()
+		cmd.Help()
 	}
 	return nil
 }

@@ -7,12 +7,6 @@ import (
 	"github.com/aviate-labs/imp/internal/cmd"
 )
 
-var pwd string
-
-func init() {
-	pwd, _ = os.Getwd()
-}
-
 var imp = cmd.Command{
 	Name:    "imp",
 	Summary: "experimental command line tool for the Internet Computer",
@@ -41,6 +35,6 @@ func main() {
 		return
 	}
 	if err := imp.Call(os.Args[1:]...); err != nil {
-		panic(err)
+		imp.Help()
 	}
 }

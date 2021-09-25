@@ -9,9 +9,14 @@ func (c Command) Help() {
 	fmt.Println(strings.Title(c.Summary))
 	fmt.Println()
 	fmt.Printf("Usage:\n\t%s", c.Name)
+	var names []string
+	for _, c := range c.Commands {
+		names = append(names, c.Name)
+	}
+	padding := longest(names) + 1
 	var cmds []string
 	for _, c := range c.Commands {
-		cmds = append(cmds, fmt.Sprintf("%s\t\t%s", c.Name, c.Summary))
+		cmds = append(cmds, fmt.Sprintf("%s%s", padRight(c.Name, padding), c.Summary))
 	}
 	if len(cmds) == 0 {
 		var args []string
@@ -32,7 +37,7 @@ func (c Command) Help() {
 			options = append(options, s)
 		}
 		if len(options) != 0 {
-			fmt.Printf("\nArguments:\n\t")
+			fmt.Printf("\nOptional arguments:\n\t")
 			fmt.Printf("%s", strings.Join(options, "\n\t"))
 		}
 		fmt.Println()
@@ -43,5 +48,18 @@ func (c Command) Help() {
 		fmt.Print("\t")
 		fmt.Println(strings.Join(cmds, "\n\t"))
 	}
-	fmt.Println()
+}
+
+func padRight(s string, n int) string {
+	return s + strings.Repeat(" ", n-len(s))
+}
+
+func longest(a []string) int {
+	var l int
+	for _, s := range a {
+		if sl := len(s); l < sl {
+			l = sl
+		}
+	}
+	return l
 }
