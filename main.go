@@ -7,10 +7,19 @@ import (
 	"github.com/aviate-labs/imp/internal/cmd"
 )
 
+var pwd string
+
+func init() {
+	pwd, _ = os.Getwd()
+}
+
 var imp = cmd.Command{
-	Name:     "imp",
-	Summary:  "experimental command line tool for the Internet Computer",
-	Commands: []cmd.Command{version},
+	Name:    "imp",
+	Summary: "experimental command line tool for the Internet Computer",
+	Commands: []cmd.Command{
+		version,
+		stats,
+	},
 }
 
 var version = cmd.Command{

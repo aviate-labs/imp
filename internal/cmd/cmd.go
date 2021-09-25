@@ -30,8 +30,8 @@ type Command struct {
 type Arguments []string
 
 type Option struct {
-	Name  string
-	Value bool
+	Name     string
+	HasValue bool
 }
 
 func (c Command) Call(args ...string) error {
@@ -85,7 +85,7 @@ func (c Command) extractOptions(args Arguments) (Arguments, map[string]string) {
 			var cont bool
 			for _, o := range c.Options {
 				if a, ok := trimPrefix(a, o.Name); ok {
-					if a, ok := trimPrefix(a, "="); ok && o.Value {
+					if a, ok := trimPrefix(a, "="); ok && o.HasValue {
 						if a != "" {
 							options[o.Name] = a
 							cont = true
@@ -93,7 +93,7 @@ func (c Command) extractOptions(args Arguments) (Arguments, map[string]string) {
 						}
 					}
 					if a == "" {
-						if o.Value {
+						if o.HasValue {
 							arg = o.Name
 						} else {
 							options[o.Name] = ""
