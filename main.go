@@ -9,7 +9,7 @@ import (
 
 var imp = cmd.Command{
 	Name:     "imp",
-	Summary:  "tool for managing Motoko modules",
+	Summary:  "experimental command line tool for the Internet Computer",
 	Commands: []cmd.Command{version},
 }
 
@@ -17,7 +17,7 @@ var version = cmd.Command{
 	Name:    "version",
 	Aliases: []string{"v"},
 	Summary: "print Imp version",
-	Method: func(args []string) error {
+	Method: func(args []string, _ map[string]string) error {
 		if len(args) != 0 {
 			return fmt.Errorf("too long")
 		}
