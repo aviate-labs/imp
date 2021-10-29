@@ -1,5 +1,7 @@
 # An Experimental Command Line Tool for the Internet Computer
 
+**WIP**: no guarantees that anything will work.
+
 ## Usage
 
 ```shell

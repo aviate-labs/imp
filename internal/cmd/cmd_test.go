@@ -41,6 +41,10 @@ func ExampleHelpSub() {
 	// Output:
 	// Usage:
 	//	sub <c>
+	//
+	// Optional arguments:
+	//	all
+	//	v		<value>
 }
 
 func ExampleHelpSubC() {
