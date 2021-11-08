@@ -1,5 +1,7 @@
 github.com/aviate-labs/candid-go v0.0.0-20211015180454-bf9c40d681b5 h1:apepIK8IgmTZYTm+QgHY5inMdU0JzJ6LqKxdp79NGW4=
 github.com/aviate-labs/candid-go v0.0.0-20211015180454-bf9c40d681b5/go.mod h1:aSwDlnrwlxvHK7v/LfyAI5dCR4CHf5vHfwn/t9xQzgY=
+github.com/aviate-labs/candid-go v0.0.0-20211108143920-a3480d02c622 h1:kJIVBqQo2glK3iHexw9KCuWb5i7Y2ehfS2+KALF7iY4=
+github.com/aviate-labs/candid-go v0.0.0-20211108143920-a3480d02c622/go.mod h1:aSwDlnrwlxvHK7v/LfyAI5dCR4CHf5vHfwn/t9xQzgY=
 github.com/aviate-labs/leb128 v0.3.0 h1:s9htRv3OYk8nuHqJu9PiVFJxv1jIUTIcpEeiURa91uQ=
 github.com/aviate-labs/leb128 v0.3.0/go.mod h1:GclhBOjhIKmcDlgHKhj0AEZollzERfZUbcRUKiQVqgY=
 github.com/aviate-labs/principal-go v0.2.0 h1:Xp5V9L90dCmOLsUjTwL96Yhrv4czOSyzMV8fzJunmuM=
