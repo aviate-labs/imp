@@ -17,14 +17,14 @@ var imp = cmd.Command{
 	Name:    "imp",
 	Summary: "experimental command line tool for the Internet Computer",
 	Commands: []cmd.Command{
-		version,
-		stats,
-		initialize,
-		get,
+		versionCommand,
+		modCommand,
+		candidCommand,
+		statsCommand,
 	},
 }
 
-var version = cmd.Command{
+var versionCommand = cmd.Command{
 	Name:    "version",
 	Aliases: []string{"v"},
 	Summary: "print Imp version",

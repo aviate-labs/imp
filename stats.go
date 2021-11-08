@@ -15,16 +15,16 @@ const (
 	defaultStep = 7200
 )
 
-var stats = cmd.Command{
+var statsCommand = cmd.Command{
 	Name:    "stats",
 	Aliases: []string{"s"},
 	Summary: "some statistics",
 	Commands: []cmd.Command{
-		subnet,
+		subnetCommand,
 	},
 }
 
-var subnet = cmd.Command{
+var subnetCommand = cmd.Command{
 	Name:    "subnet",
 	Aliases: []string{"sn"},
 	Summary: "gets subnet stats from the ICA",

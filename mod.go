@@ -14,7 +14,35 @@ import (
 	"github.com/aviate-labs/imp/internal/cmd"
 )
 
-var get = cmd.Command{
+var modCommand = cmd.Command{
+	Name:    "mod",
+	Summary: "a Motoko package manager",
+	Commands: []cmd.Command{
+		initializeCommand,
+		getCommand,
+	},
+}
+
+var initializeCommand = cmd.Command{
+	Name:    "init",
+	Summary: "initialize new module in current directory",
+	Args:    []string{"module-name"},
+	Method: func(args []string, _ map[string]string) error {
+		if _, err := os.Stat(pwd + "/mo.mod"); err == nil {
+			fmt.Println("mo.mod already exists")
+			return nil
+		}
+		f, err := os.Create(pwd + "/mo.mod")
+		if err != nil {
+			panic(err)
+		}
+		defer f.Close()
+		f.WriteString(fmt.Sprintf("module %s\n\n", args[0]))
+		return nil
+	},
+}
+
+var getCommand = cmd.Command{
 	Name: "get",
 	Args: []string{"module-name", "tag"},
 	Method: func(args []string, _ map[string]string) error {
